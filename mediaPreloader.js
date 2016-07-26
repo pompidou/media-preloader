@@ -6,7 +6,7 @@
  * A simple solution to get notified when media has finished loading.
  * Resolves a promise as soon as all passed media elements have loaded.
  * Media elements need to be present in the DOM.
- * Supports <img>, <picture>, <video>.
+ * Supports <img>, <picture>, <video>, <audio>.
  */
 
 
@@ -62,8 +62,8 @@ define([
 						element.addEventListener('error', onerror);
 					}
 				}
-				else if (mediaType === 'VIDEO') {
-					if (element.readyState === 4) { // 'canplaythrough' event has already been fired, for example if video is already in DOM on page load
+				else if (['VIDEO', 'AUDIO'].indexOf(mediaType) >= 0) {
+					if (element.readyState === 4) { // 'canplaythrough' event has already been fired, for example if video/audio is already in DOM on page load
 						onload();
 					}
 					else {
